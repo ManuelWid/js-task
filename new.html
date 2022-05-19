@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="result"></div>
+
+    <script>
+        let arr = [
+            {
+                name: "serri",
+                age: 32
+            },{
+                name: "manuel",
+                age: 31
+            },{
+                name: "stephan",
+                age: 30
+            }
+        ];
+
+        let count = 1;
+
+        arr.forEach(function (item) {
+            let target = document.getElementById("result");
+            let x = item;
+            let y = Object.keys(x);
+        
+            let node = document.createElement("button");
+            let textnode = document.createTextNode("Click me");
+            node.appendChild(textnode);
+            node.setAttribute("id", `btn-${count}`);
+            node.setAttribute("onclick", "show()");
+
+            let nodediv = document.createElement("div");
+            nodediv.appendChild(node);
+            target.appendChild(nodediv);
+
+            let content = "";
+            y.forEach(function (key) {
+                // console.log(key);
+                // console.log(x[key]);
+                content += `${key}: ${x[key]} \n`;
+            });
+
+            let node2 = document.createElement("p");
+            let textnode2 = document.createTextNode(`${content}`);
+            node2.appendChild(textnode2);
+            node2.setAttribute("id", `p-${count}`);
+            node2.style.display = "none";
+            nodediv.appendChild(node2);
+            count++;
+        });
+
+        function show() {
+            // console.log(event.srcElement.id);
+            let source = event.srcElement.id;
+            let pattern = /[0-9]/;
+            let result = source.match(pattern);
+            // console.log(result);
+            let target = document.getElementById(`p-${result}`);
+            if(target.style.display === "none") {
+                target.style.display = "block";
+            } else {
+                target.style.display = "none";
+            }
+        };
+        
+        
+        // =========
+        // Loop Only
+        // =========
+        // arr.forEach(function (item) {
+        //     var x = item;
+        //     var y = Object.keys(x);
+        //     y.forEach(function (key) {
+        //         // console.log(key);
+        //         // console.log(x[key]);
+        //         document.getElementById("result").innerHTML += `${key} : ${x[key]} <br>`;
+        //     })
+        // });
+    </script>
+</body>
+</html>
